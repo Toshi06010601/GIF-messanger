@@ -11,11 +11,16 @@ const imageLimit = 20;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+let posts = [];
+let user;
+let images = [];
+
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+    res.render("index.ejs", { images, posts});
 });
 
 app.post("/searchGIF", async (req, res) => {
+    user = req.body.user;
     const response = await axios.get(API_URL + "/search?", {
         params: {
             api_key: API_KEY,
@@ -23,7 +28,17 @@ app.post("/searchGIF", async (req, res) => {
             limit: imageLimit
         }
     });
-    res.render("index.ejs", { images: response.data.data });
+    images = response.data.data;
+    res.redirect("/");
+});
+
+app.post("/postGIF", async (req, res) => {
+    posts.push({
+        user: user,
+        url: req.body.url
+    });
+    images = [];
+    res.redirect("/");
 });
 
 app.listen(port, () => {

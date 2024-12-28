@@ -20,8 +20,30 @@
 
     <main>
         <div class="container">
-            <div class="message-board"></div>
+            <div class="message-board">
+                <% if(locals.posts && locals.posts.length> 0) { %>
+                    <ul>
+                        <% posts.forEach(post=> { %>
+                            <% if(post.user == "userA") { %>
+                            <li class="message-bubbleA">
+                                <iframe src="<%= post.url %>" frameborder="0" class="GIF-options"></iframe>
+                            </li>
+                            <% } else { %>
+                                <li class="message-bubbleB">
+                                    <iframe src="<%= post.url %>" frameborder="0" class="GIF-options <%= post.user %>"></iframe>
+                                </li>
+                            <% } %>
+
+                        <% }) %>
+                    </ul>
+                <% } %>
+
+            </div>
             <form action="/searchGIF" method="post">
+                <select name="user" id="user">
+                    <option value="userA">userA</option>
+                    <option value="userB">userB</option>
+                </select>
                 <label for="GIF-keyword">Enter keyword</label>
                 <input type="text" id="GIF-keyword" name="keyword">
                 <button type="submit">Search</button>
@@ -29,13 +51,14 @@
             <div class="GIF-display">
                 <% if(locals.images && locals.images.length> 1) { %>
                     <ul>
-                        <% locals.images.forEach(image => { %>
+                        <% locals.images.forEach(image=> { %>
                             <li>
-                                <iframe src="<%= image.embed_url %>" class="GIF-options"></iframe>
+                                <img src="<%= image.images.fixed_width_still.url %>" data-url="<%= image.embed_url %>"
+                                    class="GIF-options">
                             </li>
-                        <% }); %>
+                            <% }); %>
                     </ul>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </main>
@@ -44,5 +67,28 @@
         <p>copyright@Toshi</p>
     </footer>
 </body>
+
+<script>
+    const GIFImages = document.querySelectorAll(".GIF-options");
+    const form = document.createElement("form");
+    form.method = "post";
+    form.action = "/postGIF"
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = "url";
+    let src;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        GIFImages.forEach(GIFImage => {
+            GIFImage.addEventListener("click", (e) => {
+                input.value = e.target.dataset.url;
+                console.log("clicked");
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            });
+        });
+    });
+</script>
 
 </html>

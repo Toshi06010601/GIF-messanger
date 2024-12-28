@@ -17,14 +17,14 @@ header {
     border-bottom: solid black 3px;
 }
 
-header > h1 {
+header>h1 {
     text-align: center;
 
 }
 
 main {
     grid-area: main;
-    margin: 10px 50px ;
+    margin: 10px 50px;
 }
 
 .message-board {
@@ -32,6 +32,63 @@ main {
     max-width: 800px;
     border: solid lightblue 3px;
     margin: 30px auto;
+    padding: 10px;
+}
+
+.message-board > ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    gap: 10px;
+    position: relative;
+}
+
+.message-bubbleA {
+    position: relative;
+    left: 60%;
+    background: #00aabb;
+    border-radius: .4em;
+    color: white;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.message-bubbleA::after {
+    content: '';
+    position: absolute;
+    bottom: 40%;
+    left: 104%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-left-color: #00aabb;
+}
+
+.message-bubbleB {
+    position: relative;
+    left: 10%;
+    background: #00aabb;
+    border-radius: .4em;
+    color: white;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.message-bubbleB::after {
+    content: '';
+    position: absolute;
+    bottom: 40%;
+    right: 104%;
+    margin-right: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #00aabb;
 }
 
 form[action="/searchGIF"] {
@@ -53,15 +110,16 @@ form[action="/searchGIF"] {
     background-color: rgb(169, 233, 211);
 }
 
-.GIF-display > ul {
+.GIF-display>ul {
     width: 100%;
     max-width: 700px;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    overflow-y: scroll;
 }
 
-.GIF-display > ul > li {
+.GIF-display>ul>li {
     list-style: none;
     width: 80px;
     height: 80px;
@@ -74,20 +132,20 @@ form[action="/searchGIF"] {
     background-color: aliceblue;
 }
 
+.GIF-options iframe {
+    pointer-events: none;
+}
+
 footer {
     grid-area: footer;
     position: relative;
     border-top: solid black 3px;
 }
 
-footer > p {
+footer>p {
     display: block;
     width: 100%;
     position: absolute;
     bottom: 20px;
     text-align: center;
 }
-
-
-
-
