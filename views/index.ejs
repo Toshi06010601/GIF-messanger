@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF Messanger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>GIF Messanger</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="message-board"></div>
+            <form action="/searchGIF" method="post">
+                <label for="GIF-keyword">Enter keyword</label>
+                <input type="text" id="GIF-keyword" name="keyword">
+                <button type="submit">Search</button>
+            </form>
+            <div class="GIF-display">
+                <% if(locals.images && locals.images.length> 1) { %>
+                    <ul>
+                        <% locals.images.forEach(image => { %>
+                            <li>
+                                <iframe src="<%= image.embed_url %>" class="GIF-options"></iframe>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>copyright@Toshi</p>
+    </footer>
+</body>
+
+</html>

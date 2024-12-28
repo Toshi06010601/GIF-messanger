@@ -1,0 +1,93 @@
+body {
+    width: 100%;
+    height: 100vh;
+    font-family: "Lato", serif;
+    font-weight: 400;
+    font-style: normal;
+    display: grid;
+    box-sizing: border-box;
+    grid-template:
+        "header header header" 100px
+        "main main main" 1fr
+        "footer footer footer" 100px;
+}
+
+header {
+    grid-area: header;
+    border-bottom: solid black 3px;
+}
+
+header > h1 {
+    text-align: center;
+
+}
+
+main {
+    grid-area: main;
+    margin: 10px 50px ;
+}
+
+.message-board {
+    min-height: 400px;
+    max-width: 800px;
+    border: solid lightblue 3px;
+    margin: 30px auto;
+}
+
+form[action="/searchGIF"] {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#GIF-keyword {
+    width: 350px;
+}
+
+.GIF-display {
+    width: 100%;
+    max-width: 800px;
+    height: 300px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: rgb(169, 233, 211);
+}
+
+.GIF-display > ul {
+    width: 100%;
+    max-width: 700px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.GIF-display > ul > li {
+    list-style: none;
+    width: 80px;
+    height: 80px;
+}
+
+.GIF-options {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background-color: aliceblue;
+}
+
+footer {
+    grid-area: footer;
+    position: relative;
+    border-top: solid black 3px;
+}
+
+footer > p {
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+}
+
+
+
+
